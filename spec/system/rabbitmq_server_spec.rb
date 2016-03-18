@@ -38,6 +38,26 @@ describe "RabbitMQ server configuration" do
       expect(ssl_options).to include('{fail_if_no_peer_cert,false}')
     end
 
+    it 'sets ssl verification depth to 5' do
+      expect(ssl_options).to include('{depth,5}')
+    end
+
+    context 'when certificate_verification_depth is set' do
+      before(:context) do
+        modify_and_deploy_manifest do |manifest|
+          manifest['properties']['rabbitmq-server']['ssl']['certificate_verification_depth'] = 42
+        end
+      end
+
+      after(:context) do
+        bosh_director.deploy(environment.bosh_manifest.path)
+      end
+
+      it 'sets ssl verification depth to configured value' do
+        expect(ssl_options).to include('{depth,42}')
+      end
+    end
+
     context 'when SSL verification and peer validation is enabled' do
       before(:context) do
         modify_and_deploy_manifest do |manifest|

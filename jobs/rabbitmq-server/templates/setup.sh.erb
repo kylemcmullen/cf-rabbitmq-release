@@ -115,6 +115,7 @@ fail_if_no_peer_cert = p("rabbitmq-server.ssl.fail_if_no_peer_cert")
   #                      {keyfile,"/var/vcap/jobs/rabbitmq-server/bin/../etc/key.pem"},
   #                      {verify,verify_none},
   #                      {fail_if_no_peer_cert,false},
+  #                      {depth, 2},
   #                      {versions,['tlsv1.2','tlsv1.1',tlsv1]}]
   #
   # SERVER_START_ARGS is stored in rabbitmq-env.conf (currently /var/vcap/store/rabbitmq/etc/rabbitmq/rabbitmq-env.conf),
@@ -140,7 +141,7 @@ fail_if_no_peer_cert = p("rabbitmq-server.ssl.fail_if_no_peer_cert")
   <% if ssl %>
   # concatenate options encoded in double quotes, see the concatenation comment above.
   # {versions,['tlsv1.2','tlsv1.1',tlsv1]} disables SSLv3 to mitigate the POODLE attack.
-  SSL_OPTIONS=" -rabbit ssl_options [{cacertfile,\\\"${SCRIPT_DIR}/../etc/cacert.pem\\\"},{certfile,\\\"${SCRIPT_DIR}/../etc/cert.pem\\\"},{keyfile,\\\"${SCRIPT_DIR}/../etc/key.pem\\\"},{verify,<%= "#{ssl_verification}" %>},{fail_if_no_peer_cert,<%= "#{fail_if_no_peer_cert}" %>},{versions,<%= "[#{supported_tls_versions.join(',')}]" %>}]"
+  SSL_OPTIONS=" -rabbit ssl_options [{cacertfile,\\\"${SCRIPT_DIR}/../etc/cacert.pem\\\"},{certfile,\\\"${SCRIPT_DIR}/../etc/cert.pem\\\"},{keyfile,\\\"${SCRIPT_DIR}/../etc/key.pem\\\"},{verify,<%= "#{ssl_verification}" %>},{fail_if_no_peer_cert,<%= "#{fail_if_no_peer_cert}" %>},{versions,<%= "[#{supported_tls_versions.join(',')}]" %>}, {depth,<%= p("rabbitmq-server.ssl.certificate_verification_depth")%>]"
   SERVER_START_ARGS="${SERVER_START_ARGS}\"${SSL_OPTIONS}\""
   <% end %>
   if [ -f ${CONF_ENV_FILE} ]

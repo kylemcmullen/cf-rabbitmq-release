@@ -24,6 +24,9 @@ properties:
   rabbitmq-server.ssl.fail_if_no_peer_cert:
     description: "Should RabbitMQ server fail if there is no peer cert"
     default: false
+  rabbitmq-server.ssl.certificate_verification_depth:
+    description: "The maximum number of non-self-issued intermediate certificates that may follow the peer certificate in a valid certification path"
+    default: 5
 
   rabbitmq-server.plugins:
     description: "RabbitMQ plugins (array of strings)"

@@ -1,0 +1,8 @@
+2016-04-09 16:56:47.921:INFO::main: Logging initialized @2064ms
+2016-04-09 16:56:48.661:INFO:oejs.Server:main: jetty-9.2.z-SNAPSHOT
+2016-04-09 16:56:48.684:INFO:oejs.ServerConnector:main: Started ServerConnector@639c7f9c{HTTP/1.1}{0.0.0.0:4567}
+2016-04-09 16:56:48.684:INFO:oejs.Server:main: Started @2828ms
+2016-04-09 17:08:11.814:INFO::main: Logging initialized @2934ms
+2016-04-09 17:08:12.530:INFO:oejs.Server:main: jetty-9.2.z-SNAPSHOT
+2016-04-09 17:08:12.555:INFO:oejs.ServerConnector:main: Started ServerConnector@639c7f9c{HTTP/1.1}{0.0.0.0:4567}
+2016-04-09 17:08:12.556:INFO:oejs.Server:main: Started @3677ms

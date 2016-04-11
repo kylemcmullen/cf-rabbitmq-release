@@ -12,10 +12,10 @@ infrastructure="${1:?}"
 
 shift
 
-if [ "$infrastructure" != "aws" ]; then
-  echo "usage: ./scripts/generate-manifest aws [stubs...]" 1>&2
-  exit 1
-fi
+#if [ "$infrastructure" != "aws" && "$infrastructure" != "warden" ]; then
+#  echo "usage: ./scripts/generate-manifest aws [stubs...]" 1>&2
+#  exit 1
+#fi
 
 spiff merge \
   "${templates}/cf-rabbitmq-deployment.yml" \

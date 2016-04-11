@@ -1,0 +1,222 @@
+compilation:
+  cloud_properties:
+    cpu: 1
+    disk: 8000
+    ram: 2048
+  network: rabbitmq_z1 
+  reuse_compilation_vms: true
+  workers: 6
+director_uuid: b7e651e2-3afe-471f-9bca-93048fa591f4 
+jobs:
+- instances: 1
+  name: rmq_z1
+  networks:
+  - name: rabbitmq_z1
+    static_ips:
+    - 10.244.78.6
+  persistent_disk: 2048
+  properties: {}
+  resource_pool: services-small-z1
+  templates:
+  - name: rabbitmq-server
+    release: cf-rabbitmq
+- instances: 1
+  name: rmq_z2
+  networks:
+  - name: rabbitmq_z2
+    static_ips:
+    - 10.244.79.6
+  persistent_disk: 2048
+  properties: {}
+  resource_pool: services-small-z2
+  templates:
+  - name: rabbitmq-server
+    release: cf-rabbitmq
+- instances: 1
+  name: rmq-broker
+  networks:
+  - name: rabbitmq_z1
+    static_ips:
+    - 10.244.78.7
+  release: cf-rabbitmq
+  resource_pool: services-small-z1
+  template: rabbitmq-broker
+- instances: 1
+  name: haproxy_z1
+  networks:
+  - name: rabbitmq_z1
+    static_ips:
+    - 10.244.78.8
+  release: cf-rabbitmq
+  resource_pool: services-small-z1
+  template: rabbitmq-haproxy
+- instances: 1
+  name: haproxy_z2
+  networks:
+  - name: rabbitmq_z2
+    static_ips:
+    - 10.244.79.8
+  release: cf-rabbitmq
+  resource_pool: services-small-z2
+  template: rabbitmq-haproxy
+- instances: 1
+  lifecycle: errand
+  name: broker-registrar
+  networks:
+  - name: rabbitmq_z1
+  properties:
+    broker:
+      host: pivotal-rabbitmq-broker.api.bosh-lite.com
+      name: p-rabbitmq
+      password: p1-rabbit-default-password
+      username: p1-rabbit
+  release: cf-rabbitmq
+  resource_pool: services-small-z1
+  template: broker-registrar
+- instances: 1
+  lifecycle: errand
+  name: broker-deregistrar
+  networks:
+  - name: rabbitmq_z1
+  properties:
+    broker:
+      host: pivotal-rabbitmq-broker.api.bosh-lite.com
+      name: p-rabbitmq
+      password: p1-rabbit-default-password
+      username: p1-rabbit
+  release: cf-rabbitmq
+  resource_pool: services-small-z1
+  template: broker-deregistrar
+- instances: 1
+  lifecycle: errand
+  name: smoke-tests
+  networks:
+  - name: rabbitmq_z1
+  properties:
+    broker:
+      name: p-rabbitmq
+  release: cf-rabbitmq
+  resource_pool: services-small-z1
+  template: smoke-tests
+meta:
+  default:
+    rabbitmq_server:
+      properties: {}
+      templates:
+      - name: rabbitmq-server
+        release: cf-rabbitmq
+name: cf-rabbitmq
+networks:
+- name: rabbitmq_z1
+  subnets:
+  - gateway: 10.244.78.1
+    range: 10.244.78.0/24
+    static:
+    - 10.244.78.2 - 10.244.78.100
+  type: manual
+- name: rabbitmq_z2
+  subnets:
+  - gateway: 10.244.79.1
+    range: 10.244.79.0/24
+    static:
+    - 10.244.79.2 - 10.244.79.100
+  type: manual
+properties:
+  cf:
+    admin_password: admin
+    admin_username: admin
+    api_url: https://api.bosh-lite.com
+    domain: api.bosh-lite.com
+    nats:
+      host: 10.244.0.6
+      password: nats
+      port: 4222
+      username: nats
+  rabbitmq-broker:
+    cc_endpoint: https://api.bosh-lite.com
+    ip: 10.244.78.7
+    logging:
+      level: debug
+      print_stack_traces: false
+    rabbitmq:
+      administrator:
+        password: admin
+        username: admin
+      hosts:
+      - 10.244.78.8
+      - 10.244.79.8
+      management_domain: pivotal-rabbitmq.bosh-lite.com
+      management_ip: 10.244.78.8
+      operator_set_policy:
+        enabled: true
+        policy_definition: '{"ha-mode":"exactly","ha-params":2,"ha-sync-mode":"automatic"}'
+        policy_name: operator_set_policy
+        policy_priority: 50
+      ssl: true
+    route: pivotal-rabbitmq-broker
+    service:
+      password: p1-rabbit-default-password
+      url: http://10.244.78.7:4567
+      username: p1-rabbit
+  rabbitmq-haproxy:
+    ports:
+    - 5672
+    - 5671
+    - 1883
+    - 8883
+    - 61613
+    - 61614
+    - 15672
+    - 15674
+    server_ips:
+    - 10.244.78.6
+    - 10.244.79.6
+    stats:
+      password: admin
+      username: admin
+  rabbitmq-server:
+    administrators:
+      broker:
+        password: admin
+        username: admin
+    config: null
+    plugins:
+    - rabbitmq_management
+    - rabbitmq_mqtt
+    - rabbitmq_stomp
+    ssl:
+      cacert: null
+      cert: null
+      key: null
+      security_options: null
+    static_ips:
+    - 10.244.78.6
+    - 10.244.79.6
+releases:
+- name: cf-rabbitmq
+  version: 214.0.0
+resource_pools:
+- cloud_properties:
+    cpu: 1
+    disk: 4096
+    ram: 1024
+  name: services-small-z1
+  network: rabbitmq1
+  stemcell:
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+    version: 3147
+- cloud_properties:
+    cpu: 1
+    disk: 4096
+    ram: 1024
+  name: services-small-z2
+  network: rabbitmq1
+  stemcell:
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+    version: 3147
+update:
+  canaries: 1
+  canary_watch_time: 30000-180000
+  max_in_flight: 4
+  update_watch_time: 30000-180000
+

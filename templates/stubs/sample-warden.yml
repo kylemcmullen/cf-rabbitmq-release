@@ -1,0 +1,120 @@
+meta:
+  stemcell:
+    version: 3130
+
+director_uuid: bosh-director-uuid
+name: cf-rabbitmq
+
+releases:
+- name: cf-rabbitmq
+  version: 214 
+
+jobs:
+- name: rmq_z1
+  instances: 1
+  networks:
+  - name: rabbitmq_z1
+    static_ips:
+    - 10.244.78.6
+
+- name: rmq_z2
+  instances: 1
+  networks:
+  - name: rabbitmq_z2
+    static_ips:
+    - 10.244.79.6
+
+- name: rmq-broker
+  instances: 1
+  networks:
+  - name: rabbitmq_z1
+    static_ips:
+    - 10.244.78.7
+
+- name: haproxy_z1
+  instances: 1
+  networks:
+  - name: rabbitmq_z1
+    static_ips:
+    - 10.244.78.8
+
+- name: haproxy_z2
+  instances: 1
+  networks:
+  - name: rabbitmq_z2
+    static_ips:
+    - 10.244.79.8
+
+- name: broker-registrar
+  properties:
+    broker:
+      name: p-rabbitmq
+
+properties:
+  # for broker and route registrars
+  cf:
+    domain: api.bosh-lite.com 
+    admin_password: admin
+    admin_username: admin
+    api_url: "https://api.bosh-lite.com"
+    nats:
+      host: 10.244.0.6
+      password: nats
+      port: 4222
+      username: nats
+  rabbitmq-server:
+    administrators:
+      broker:
+        username: admin 
+        password: admin
+    static_ips:
+    - 10.244.78.6
+    - 10.244.79.6
+  rabbitmq-haproxy:
+    stats:
+      username: admin
+      password: admin
+  rabbitmq-broker:
+    ip: 10.244.78.7
+    cc_endpoint: https://api.bosh-lite.com
+    service:
+      username: "p1-rabbit"
+      password: "p1-rabbit-default-password"
+    logging:
+      level: debug
+      print_stack_traces: false
+    rabbitmq:
+      management_domain: pivotal-rabbitmq.bosh-lite.com
+      management_ip: 10.244.78.8
+      ssl: true
+      hosts:
+        - 10.244.78.8
+        - 10.244.79.8
+
+networks:
+- name: rabbitmq_z1
+  type: manual
+  subnets:
+  - range: 10.244.78.0/24
+    gateway: 10.244.78.1
+    reserved:
+    - 10.1244.78.2 - 10.244.78.4
+    - 10.244.78.254
+    static:
+    - 10.244.78.6 - 10.244.78.8
+
+- name: rabbitmq_z2
+  type: manual
+  subnets:
+  - range: 10.244.79.0/24
+    gateway: 10.244.79.1
+    reserved:
+    - 10.244.79.2 - 10.244.79.4
+    - 10.244.79.254
+    static:
+    - 10.244.79.6 - 10.244.79.8
+
+resource_pools:
+- name: services-small-z1
+
+- name: services-small-z2

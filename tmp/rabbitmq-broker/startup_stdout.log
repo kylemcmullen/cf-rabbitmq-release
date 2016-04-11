@@ -1,0 +1,13 @@
+Sat Apr  9 16:56:45 UTC 2016: Starting RabbitMQ service broker
+Sat Apr  9 16:56:45 UTC 2016: Finished starting RabbitMQ service broker
+2016-Apr-09 16:56:48 +0000 36963f71-bf6e-4d23-bcbe-aa96a002b92d INFO [io.pivotal.pcf.rabbitmq.server] - Starting. PID: 2831, PID path: /var/vcap/sys/run/rabbitmq-broker/pid, CC endpoint: https://api.bosh-lite.com
+2016-Apr-09 16:56:48 +0000 36963f71-bf6e-4d23-bcbe-aa96a002b92d INFO [io.pivotal.pcf.rabbitmq.server] - Initialized service catalog
+2016-Apr-09 16:56:48 +0000 36963f71-bf6e-4d23-bcbe-aa96a002b92d INFO [io.pivotal.pcf.rabbitmq.server] - Finalized own configuration
+2016-Apr-09 16:56:48 +0000 36963f71-bf6e-4d23-bcbe-aa96a002b92d INFO [io.pivotal.pcf.rabbitmq.server] - Will use HTTPS to talk to RabbitMQ HTTP API as admin...
+2016-Apr-09 17:08:01 +0000 36963f71-bf6e-4d23-bcbe-aa96a002b92d INFO [io.pivotal.pcf.rabbitmq.server] - Asked to shut down...
+Sat Apr  9 17:08:08 UTC 2016: Starting RabbitMQ service broker
+Sat Apr  9 17:08:08 UTC 2016: Finished starting RabbitMQ service broker
+2016-Apr-09 17:08:12 +0000 36963f71-bf6e-4d23-bcbe-aa96a002b92d INFO [io.pivotal.pcf.rabbitmq.server] - Starting. PID: 3713, PID path: /var/vcap/sys/run/rabbitmq-broker/pid, CC endpoint: https://api.bosh-lite.com
+2016-Apr-09 17:08:12 +0000 36963f71-bf6e-4d23-bcbe-aa96a002b92d INFO [io.pivotal.pcf.rabbitmq.server] - Initialized service catalog
+2016-Apr-09 17:08:12 +0000 36963f71-bf6e-4d23-bcbe-aa96a002b92d INFO [io.pivotal.pcf.rabbitmq.server] - Finalized own configuration
+2016-Apr-09 17:08:12 +0000 36963f71-bf6e-4d23-bcbe-aa96a002b92d INFO [io.pivotal.pcf.rabbitmq.server] - Will use HTTPS to talk to RabbitMQ HTTP API as admin...

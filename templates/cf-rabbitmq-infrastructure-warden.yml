@@ -1,0 +1,45 @@
+compilation:
+  cloud_properties:
+    cpu: 1
+    ram: 2048
+    disk: 8_000
+  network: rabbitmq1
+  reuse_compilation_vms: true
+  workers: 6
+
+meta:
+  stemcell:
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+    version: 3130 
+
+networks:
+- name: rabbitmq_z1  
+  type: manual
+  subnets:
+    - range: 10.244.78.0/24
+      gateway: 10.244.78.1
+      static: 
+      - 10.244.78.2 - 10.244.78.100
+- name: rabbitmq_z2
+  type: manual
+  subnets:
+    - range: 10.244.79.0/24
+      gateway: 10.244.79.1
+      static:
+      - 10.244.79.2 - 10.244.79.100
+
+resource_pools:
+- name: services-small-z1 
+  network: rabbitmq1
+  cloud_properties:
+    cpu: 1
+    ram: 1_024
+    disk: 4_096
+  stemcell : (( meta.stemcell ))
+- name: services-small-z2
+  network: rabbitmq1
+  cloud_properties:
+    cpu: 1
+    ram: 1_024
+    disk: 4_096
+  stemcell: (( meta.stemcell ))

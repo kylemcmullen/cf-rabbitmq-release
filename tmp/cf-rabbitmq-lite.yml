@@ -6,7 +6,7 @@ compilation:
   network: rabbitmq_z1 
   reuse_compilation_vms: true
   workers: 6
-director_uuid: b7e651e2-3afe-471f-9bca-93048fa591f4 
+director_uuid: 2da68ec9-3249-4c68-8f7b-aa6f5446033c 
 jobs:
 - instances: 1
   name: rmq_z1
@@ -185,10 +185,75 @@ properties:
     - rabbitmq_mqtt
     - rabbitmq_stomp
     ssl:
-      cacert: null
-      cert: null
-      key: null
-      security_options: null
+      cert: |
+        -----BEGIN CERTIFICATE-----
+        MIIC9DCCAdygAwIBAgIBAjANBgkqhkiG9w0BAQsFADAqMRswGQYDVQQDDBJLeWxl
+        IE1jTXVsbGVuJ3MgQ0ExCzAJBgNVBAYTAlVTMB4XDTE2MDQxMjAwMjI0N1oXDTE3
+        MDQxMjAwMjI0N1owJTEWMBQGA1UEAwwNS3lsZSBNY011bGxlbjELMAkGA1UEBhMC
+        VVMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDEzcElMwYuS/IkHbJU
+        TPjSkIOtNPwQf8nzOS7/4bSJWGPmDSz1t7sL+xIaAGDyeySKYSouS1fQyL24rjvp
+        lXogcCbVcfXJMDc3/srEc+CfoOiQB1Kl6/zuXq8poOVIhWl/pIP3ooaiMJPR/LA9
+        0A2WliZ5ugt/ASPb29Pr81wT3cvG3basuzlJxoP40nWaqQPDNsKnSfCnaC9z6CES
+        mC1qecp4byjdZZokjNvPrs6R6IC8b5MJBxyYhgIe8QLZhhKOgIdNb4xbpOrPYEOd
+        c1mHHucRghI5ngSg8W17XHihDGZB0KC9D4/y16pYIA2CYyIVdD0C6+0zKtJiXiNi
+        s3/bAgMBAAGjKjAoMA4GA1UdDwEB/wQEAwIHgDAWBgNVHSUBAf8EDDAKBggrBgEF
+        BQcDATANBgkqhkiG9w0BAQsFAAOCAQEAm1/sLWDUonqs3YoeoLwzKiBDQXiJRUcg
+        z3qk9t/KTRmtIhv8QKJssoVC9RWMBuCOYta7dWR5EKAlVPLkLPhvPiklaz3Hidw3
+        uWLE3ueQJhvRu+YURHI7iOU6M14AFfcrJYC+UoQ/DrD9tmQhoB49v1iqwNFcZX+W
+        Aj5eAr5cRXoffoO7I6zg9dtHBpgk2f/1+3bNLY7QUO5h1OOl1yjKAwHzupfHWbQW
+        TynJcUbbCJ6GCUeiGV6FD31k4aI4DB3KwyJOHK6rQY/QR6rYrGJuUt08+fulIj3F
+        ejT1NfkS2cCXi01b3uVQDRQqdhcbw0NtwJY9LwwFElHJ7u35Z+t9fQ==
+        -----END CERTIFICATE-----
+      key: |
+        -----BEGIN RSA PRIVATE KEY-----
+        MIIEogIBAAKCAQEAxM3BJTMGLkvyJB2yVEz40pCDrTT8EH/J8zku/+G0iVhj5g0s
+        9be7C/sSGgBg8nskimEqLktX0Mi9uK476ZV6IHAm1XH1yTA3N/7KxHPgn6DokAdS
+        pev87l6vKaDlSIVpf6SD96KGojCT0fywPdANlpYmeboLfwEj29vT6/NcE93Lxt22
+        rLs5ScaD+NJ1mqkDwzbCp0nwp2gvc+ghEpgtannKeG8o3WWaJIzbz67OkeiAvG+T
+        CQccmIYCHvEC2YYSjoCHTW+MW6Tqz2BDnXNZhx7nEYISOZ4EoPFte1x4oQxmQdCg
+        vQ+P8teqWCANgmMiFXQ9AuvtMyrSYl4jYrN/2wIDAQABAoIBAE1BtEOlHxUHjTuu
+        SLYdLUSDpJ1XAmh7scyAMzoR4WxVPYouu+qNwKi4W+fHJEesHbEQ6Z0YyJVWaFva
+        UfylSDb5r9T0kpbzDYo2xGSQVKp1YTZBGam21SjCFKMT3U41yS9pZsDMlWuQBEdX
+        mdv6E4t80AfTB/ZIfUoupqemdgv5wm1uNgb4EkFWUy9y5RsFMRKrAe7rdKkk6Y+7
+        Hedwiffc5dcXQuOPlLalv0ZW8oYXBo08roAEryLXEhEThTTR3MU0fUX1N1o5CxIz
+        P9tkti2oWXcaM8bj/Ace9eiJUWNoJ+onJ5aTwUQD7Wx8W3lgOkaxdYoAFeqUYuAi
+        1sAoOEkCgYEA4PlVn3JRPVxHKuo6cGARSLd2fPTF7vkmKl33EpocRGE9Mq6UVp+H
+        E2VJCIBnFxIgyRwnHyX6Z2cnK/j3CkoPRubrs7EUzzF9MBimNWZIWFoTnA3fwiMZ
+        SUuQ7SBvE3mEg5yCX767E5x68l9zLyimKPShJKohX7nuxqURt5JPciUCgYEA3/Hf
+        +uq1W6D9vt/JBZP3YpsmHGw9ilOpXr6WlDtDaBJkggRBCM2DDrDAmON+Hkdk9fbX
+        XceS+F1H0lX2Z+J90JbmyQTSQL9cbMxBu1wwSuqbwVAUAAOnijdTfuCm03MzMTkK
+        xXBpH/fHi1azdM6KrRigvhmWqTB+Dci5hWMfif8CgYAYqv46d3x07/NVv00dGUuL
+        36H8XZJ+e481wgvfXEqRLOBa+E2HmgJjnA2AAyRKoVA6/P1FKxLj16mx5qCf3jMC
+        oTti/p27gj+p0GoZHNf96BKSX+sTDGovYTvI5G+JgR+IltaszOsSYWwRu2mT2C8v
+        +nLY5Fa4eli2K09gA4j2iQKBgAagLmNLHHCIk9lY36a1mQUm1/rRTQTRstolw2jB
+        VB45JRYfsBjlk7IUkq4zVODqddc9JWQV6ohEokJb3r12GwjX3h4mcV4PC1oAtRUp
+        BhjBVjhi+SSC9ysEtgiz9tuctfAH4wSybbnPZ+z8dLTJA5tZdjAJq8Z3s9MOlEaZ
+        By7bAoGAOnYybT+lt4J1TFikg1vdufve5/r/92wKCYu7vTbgRm52djyjxWFzca+J
+        oW3Nos28uY77MAlCqFV/Ukorx76ZSqdByqHYJWudJqeXGCyIMs7YBXtPtE8izglZ
+        NiS1GN0gPu0uEZQaSwPyShWyOgcFH9CxBL0xviUavwfr3JHblXo=
+        -----END RSA PRIVATE KEY-----
+      cacert: |
+        -----BEGIN CERTIFICATE-----
+        MIIDCjCCAfKgAwIBAgIBATANBgkqhkiG9w0BAQsFADAqMRswGQYDVQQDDBJLeWxl
+        IE1jTXVsbGVuJ3MgQ0ExCzAJBgNVBAYTAlVTMB4XDTE2MDQxMjAwMjIwM1oXDTE3
+        MDQxMjAwMjIwM1owKjEbMBkGA1UEAwwSS3lsZSBNY011bGxlbidzIENBMQswCQYD
+        VQQGEwJVUzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALCRb4TNrlao
+        5EaqP7Qf4pjwb0LkwPkulU8vp9I2smvyLfSlpXmzZM/y3xBOKTAY3sowBC1ajv1w
+        43GMu+y2K8wAMx21SO+ispyoxT/Hor3jFTlyBsIX7f2Z7vHd2UvUhNzQGtzAuEq4
+        Lzdo8qTt0j8PoqrF76Ih0TypSrb8+yafVnKjxVpD9QYGx9h64OMa5ZIwtbHVGEWV
+        +dC3KPFYzaf9MlKavHWLm5FnDWetMgtcwvnbJ3rh1kzpNO+0Q+/a7LpbqAVpPU0E
+        r/jua1sbh9QugO7cyXHzx6FHZLrvgEBWU8bHlC5EivJK/wg+Q/1vvyXzcFYDMnkn
+        zV3hYGLQNt0CAwEAAaM7MDkwDwYDVR0TAQH/BAUwAwEB/zAOBgNVHQ8BAf8EBAMC
+        AoQwFgYDVR0lAQH/BAwwCgYIKwYBBQUHAwEwDQYJKoZIhvcNAQELBQADggEBADMD
+        V+fPMkjcSfP3P6XJedsi8cJ/lYkQy4kckpM57p2/FZmMsvlOJTbTHPLzvKfEz0J6
+        svrGIPTbA7jOuuSqUhNQpwypcoVv6dDGUUIoAEOhqHAYpsbV9504TtePNF21TRzx
+        CRr2I63aUHwRDv11P+FQhpK4oJHfmdYXgxNzbOKHwg0Cub3g8rcEls98A5CMyiIV
+        wOkEMyNSR7aVc6hGLG/kr5h8Y5OIsjbgpcWAaXifxLUreDbVNMsjWQlNCzKRLfqS
+        F7Cpj5uHp2L9X5dn2H6AhtLNM9twZQlikedBNUA/C5F2dtIFNcHrVxGuzf4DcPfF
+        zZBJ/Pax3cK148XrjoI=
+        -----END CERTIFICATE-----
+      security_options:
+        enable_tls1_0: true
     static_ips:
     - 10.244.78.6
     - 10.244.79.6
